@@ -25,8 +25,17 @@
       <legend>Customer:</legend>
       <br>Search for customer by customer id<br><br>
       customer id:
-      <input type="text" id="customer_id_search">
-      <button type="submit" onclick="printValue()";>SEARCH</button><br><br><br>
+      <select id = "customer_id" name=customer_id>
+        {% for id in customer_id %}
+        <option value = "{{ id.0 }}">{{ id.0 }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">SEARCH</button>
+      <br>
+      {% for id in customer %}
+      <p>{{ id.0 }} {{ id[1] }}</p>
+      {% endfor %}
+      <br><br><br>
       Add customer with phone number<br><br>
       phone number:
       <input type="text" id="customer_add">
@@ -38,25 +47,19 @@
       <input type="text" id="phoneUpdate">
       <button type="submit" onclick="updateTable()";>UPDATE</button><br><br><br>
       <table style="width:30%">
-       <tr>
+       <thead>
          <th>Customer ID</th>
          <th>Phone Number</th>
-       </tr>
+       </thead>
+       <tbody>
+         {% for r in rows %}
+         <tr>
+           <td> {{ r.0 }}</td>
+           <td> {{ r[1] }}</td>
+         </tr>
+         {% endfor %}
+       </tbody>
       </table>
-     <table style="width:30%" id="customerTable">
-     <tr>
-       <td>3</td>
-       <td id="6">839-456-5674</td>
-     </tr>
-     <tr>
-       <td>2</td>
-       <td id="5">224-534-5546</td>
-     </tr>
-     <tr>
-       <td>1</td>
-       <td id ="4">234-454-6734</td>
-     </tr>
-   </table>
     </form>
     <script>
     function addToTable(){

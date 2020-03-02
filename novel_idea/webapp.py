@@ -112,8 +112,52 @@ def book():
 
 @webapp.route('/customer.html')
 def customer():
-    return render_template('customer.html')
+    print("Fetching customer information table")
+    db_connection = connect_to_database()
+    query = "SELECT * FROM customers"
+    result = execute_query(db_connection,query)
+    print(result)
+    query = "SELECT customerID FROM customers"
+    customer = execute_query(db_connection,query)
+    print(customer)
+    ids = customer.fetchall()
+    for id in ids:
+        print(id)
+    customer_id = request.args.get('customer_id')
+    print("customer id: ",customer_id)
+    if (customer_id is not None):
+        print("Selecting customer with id ",customer_id)
+        query = "SELECT phoneNumber FROM customers where customerID=%s" % customer_id
+        customerInfo = execute_query(db_connection,query)
+        for n in customerInfo:
+            print(n)
+
+        return render_template('customer.html',
+        rows=result,customer_id=customer,customer=customerInfo)
+    return render_template('customer.html',rows=result,customer_id=customer)
 
 @webapp.route('/order.html')
 def order():
-    return render_template('order.html')
+    print("Fetching order information table")
+    db_connection = connect_to_database()
+    query = "SELECT * FROM orders"
+    result = execute_query(db_connection,query)
+    print(result)
+    query = "SELECT orderID FROM orders"
+    order = execute_query(db_connection,query)
+    print(order)
+    ids = order.fetchall()
+    for id in ids:
+        print(id)
+    order_id = request.args.get('order_id')
+    print("order id: ",order_id)
+    if (order_id is not None):
+        print("Selecting customer with id ",order_id)
+        query = "SELECT customerID, orderDate FROM orders where orderID=%s" % order_id
+        orderInfo = execute_query(db_connection,query)
+        for n in orderInfo:
+            print(n)
+
+        return render_template('order.html',
+        rows=result,order_id=order,order=orderInfo)
+    return render_template('order.html',rows=result,order_id=order)

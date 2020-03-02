@@ -24,9 +24,17 @@
     <legend>Orders:</legend>
     <br>Search for customer and date by order id<br><br>
     order id:
-    <input type="text" id="order_search">
-    <button type="submit" onclick="printValue()";>SEARCH</button>
-    <br><br><br>
+    <select id = "order_id" name=order_id>
+      {% for id in order_id %}
+      <option value = "{{ id.0 }}">{{ id.0 }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">SEARCH</button>
+    <br>
+    {% for id in order %}
+    <p>Customer ID: {{ id.0 }} <br> Date: {{ id[1] }}</p>
+    {% endfor %}
+    <br>
     Insert order with order id<br><br>
     order id:
     <input type="text" id="order_insert">
@@ -37,12 +45,22 @@
     <input type="text" id="delete_customer_from_order">
     <button type="submit" onclick="deleteFromTable()";>DELETE</button><br><br>
     <table style="width:30%">
-     <tr>
+     <thead>
        <th>Order ID</th>
-       <th>date</th>
-       <th>customer ID</th>
-     </tr>
+       <th>Customer ID</th>
+       <th>Date</th>
+     </thead>
+     <tbody>
+       {% for r in rows %}
+       <tr>
+         <td> {{ r.0 }}</td>
+         <td> {{ r[1] }}</td>
+         <td> {{ r[2] }}</td>
+       </tr>
+       {% endfor %}
+     </tbody>
     </table>
+    <!-- </table>
    <table style="width:30%" id="orderTable">
    <tr>
      <td>3</td>
@@ -59,7 +77,7 @@
      <td>"2020-01-10"</td>
      <td id="6">6</td>
    </tr>
- </table>
+ </table> -->
 </form>
 <script>
 function deleteFromTable(){
