@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>Author</title>
+</head>
+<body>
+
+<h1>A Novel Idea - Author</h1>
+
+<ul>
+ <li><a href="index.html">Homepage</a></li>
+ <li><a href="author.html">Author</a></li>
+ <li><a href="book.html">Book</a></li>
+ <li><a href="customer.html">Customer</a></li>
+ <li><a href="order.html">Order</a></li>
+</ul>
+
+<p>Click on the tabs above to get and update information on customers, books, orders, and authors</p>
+<p>Here you can search for an author, add an author, or search for books from an author</p>
+
+<form id="AuthorSearch" method="GET">
+  <fieldset>
+    <legend>Search for Authors:</legend>
+    <br>Search for author by author id<br>
+    <br>author id:
+    <select id = "author_search_id" name=search_id>
+      {% for id in authors_id %}
+      <option value = "{{ id.0 }}" {% if id.0 == state.search_id %} selected {% endif %}>{{ id.0 }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" id="author_id_search"> -->
+    <button type="submit">SEARCH</button>
+    <br>
+    {% for name in search %}
+    <p>{{ name.0 }} {{ name[1] }}</p>
+    {% endfor %}
+
+    <br>Search for books from author with author id:<br>
+    <!-- <br>author id -->
+    <select id="author_id" name=id>
+      {% for id in authors_id %}
+      <option value = "{{ id.0 }}" {% if id.0 == state.id %} selected {% endif %}>{{ id.0 }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" name="multiple_books" value=""> -->
+    <input type="submit" value="SEARCH"><br><br>
+
+    <label for="books">Choose a book:</label>
+    <select id="books">
+      {% for title in titles %}
+      <option value ="{{ title.0 }}">{{ title.0 }}</option>
+      {% endfor %}
+    </select>
+    <!-- <select id="books">
+      <option value="Mars">The Case for Mars</option>
+      <option value="InColdBlood">In Cold Blood</option>
+      <option value="BreakfastOfChampions">Breakfast of Champions</option>
+    </select> -->
+    <br>
+    <table style="width:30%">
+      <thead>
+        <th>Author ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </thead>
+      <tbody>
+        {% for r in rows %}
+        <tr>
+          <td> {{ r.0 }}</td>
+          <td> {{ r[1] }}</td>
+          <td> {{ r[2] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    </form>
+    <br><br>
+
+    <form id="EditAuthor">
+      <fieldset>
+        <legend>Edit Authors:</legend>
+        <!-- <br>Search for author by author id<br>
+        <br>author id:
+        <input type="text" id="author_id_search">
+        <button type="submit" onclick="printValue()";>SEARCH</button>
+        <br><br> -->
+        <br>Add author by first name and last name<br>
+        <br>First Name:
+        <input type="text" id="first">
+        Last Name:
+        <input type="text" id="last">
+        <button type="submit" onclick="addToTable()";>ADD</button>
+      </form>
+    <!-- <br><br>
+    <br>Search for books from author with author id:<br>
+    <br>author id -->
+    <!-- <select id="author_id">
+      {% for id in authors_id %}
+      <option value = "{{ id.authorID }}" SELECTED>{{ id.0 }}</option>
+      {% endfor %}
+    </select>
+    <input type="text" name="multiple_books" value=""> -->
+    <!-- <input type="submit" value="SEARCH"><br><br>
+    <label for="books">Choose a book:</label>
+<select id="books">
+  <option value="Mars">The Case for Mars</option>
+  <option value="InColdBlood">In Cold Blood</option>
+  <option value="BreakfastOfChampions">Breakfast of Champions</option>
+</select>
+<br>
+<table style="width:30%">
+ <thead>
+   <th>Author ID</th>
+   <th>First Name</th>
+   <th>Last Name</th>
+ </thead>
+ <tbody>
+   {% for r in rows %}
+   <tr>
+     <td> {{ r.0 }}</td>
+     <td> {{ r[1] }}</td>
+     <td> {{ r[2] }}</td>
+   </tr>
+   {% endfor %}
+</table>  -->
+<!-- <table style="width:30%" id="authorTable">
+<tr>
+ <td>3</td>
+ <td>Amy</td>
+ <td>Sage</td>
+</tr>
+<tr>
+ <td>2</td>
+ <td>Emily</td>
+ <td>Dominguez</td>
+</tr>
+<tr>
+ <td>1</td>
+ <td>Curious</td>
+ <td>George</td>
+</tr>
+</table>
+</form>
+<script>
+function addToTable(){
+ var table = document.getElementById("authorTable");
+ var row = table.insertRow(0);
+ var firstname = document.getElementById("first").value;
+ var lastname = document.getElementById("last").value;
+
+ var cell1 = row.insertCell(0).innerHTML = Math.floor((Math.random() * 100));
+ var cell2 = row.insertCell(1).innerHTML = firstname;
+ var cell3 = row.insertCell(2).innerHTML = lastname;
+ var form = document.getElementById("myForm");
+ function handleForm(event)
+ { event.preventDefault(); }
+ form.addEventListener('submit', handleForm);
+}
+</script>
+<script>
+function printValue(){
+ var output = document.getElementById("author_id_search").value;
+ if(output == "1"){
+  alert("Curious George");
+ }
+ if(output == "2"){
+  alert("Emily Dominguez");
+ }
+ if(output == "3"){
+  alert("Amy Sage");
+ }
+}</script> -->
+</body>
+</html>

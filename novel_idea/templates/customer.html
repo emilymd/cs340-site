@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>Customer</title>
+</head>
+<body>
+
+  <h1>A Novel Idea - Customer</h1>
+
+  <ul>
+   <li><a href="index.html">Homepage</a></li>
+   <li><a href="author.html">Author</a></li>
+   <li><a href="book.html">Book</a></li>
+   <li><a href="customer.html">Customer</a></li>
+   <li><a href="order.html">Order</a></li>
+  </ul>
+
+
+  <p>Click on the tabs above to get and update information on customers, books, orders, and authors</p>
+  <p>Here you can search for a customer, add a customer, and update a customer's phone number</p>
+  <form id="myForm">
+    <fieldset>
+      <legend>Customer:</legend>
+      <br>Search for customer by customer id<br><br>
+      customer id:
+      <input type="text" id="customer_id_search">
+      <button type="submit" onclick="printValue()";>SEARCH</button><br><br><br>
+      Add customer with phone number<br><br>
+      phone number:
+      <input type="text" id="customer_add">
+      <button type="submit" onclick="addToTable()";>ADD</button><br><br><br>
+      Update customer's phone number with customer id and new phone number<br><br>
+      customer id:
+      <input type="text" id="customer_update"><br>
+      new phone number:
+      <input type="text" id="phoneUpdate">
+      <button type="submit" onclick="updateTable()";>UPDATE</button><br><br><br>
+      <table style="width:30%">
+       <tr>
+         <th>Customer ID</th>
+         <th>Phone Number</th>
+       </tr>
+      </table>
+     <table style="width:30%" id="customerTable">
+     <tr>
+       <td>3</td>
+       <td id="6">839-456-5674</td>
+     </tr>
+     <tr>
+       <td>2</td>
+       <td id="5">224-534-5546</td>
+     </tr>
+     <tr>
+       <td>1</td>
+       <td id ="4">234-454-6734</td>
+     </tr>
+   </table>
+    </form>
+    <script>
+    function addToTable(){
+     var table = document.getElementById("customerTable");
+     var row = table.insertRow(0);
+     var out = document.getElementById("customer_add").value;
+
+     var cell1 = row.insertCell(0).innerHTML = Math.floor((Math.random() * 100));
+     var cell2 = row.insertCell(1).innerHTML = out;
+    }
+    </script>
+    <script>
+    function updateTable(){
+     var input = document.getElementById("customer_update").value;
+     var phoneUpdate = document.getElementById("phoneUpdate").value;
+     if(input == "1"){
+        document.getElementById("1").innerHTML = phoneUpdate;
+     }
+     if(input == "2"){
+        document.getElementById("2").innerHTML = phoneUpdate;
+     }
+     if(input == "3"){
+        document.getElementById("3").innerHTML = phoneUpdate;
+     }
+        form.addEventListener('submit', handleForm);
+    }
+    var form = document.getElementById("myForm");
+    function handleForm(event)
+    { event.preventDefault(); }
+    </script>
+    <script>
+    function printValue(){
+     var output = document.getElementById("customer_id_search").value;
+     if(output == "1"){
+      alert("234-454-6734");
+     }
+     else if(output == "2"){
+      alert("224-534-5546");
+     }
+     else if(output == "3"){
+      alert("839-456-5674");
+     }
+    }</script>
+</body>
+</html>

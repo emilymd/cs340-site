@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>Book</title>
+</head>
+<body>
+
+<h1>A Novel Idea - Book</h1>
+
+
+<ul>
+ <li><a href="index.html">Homepage</a></li>
+ <li><a href="author.html">Author</a></li>
+ <li><a href="book.html">Book</a></li>
+ <li><a href="customer.html">Customer</a></li>
+ <li><a href="order.html">Order</a></li>
+</ul>
+
+<p>Click on the tabs above to get and update information on customers, books, orders, and authors</p>
+<p>Here you can search for a book, or add a book</p>
+
+<form>
+  <fieldset>
+    <legend>Books</legend>
+    <br>Search for book by book id<br><br>
+    book id:
+    <select id = "book_id" name=book_id>
+      {% for id in book_id %}
+      <option value = "{{ id.0 }}">{{ id.0 }}</option>
+      {% endfor %}
+    </select>
+    <!-- <input type="text" id="author_id_search"> -->
+    <button type="submit">SEARCH</button>
+    <br>
+    {% for name in search %}
+    <p>{{ name.0 }} {{ name[1] }}</p>
+    {% endfor %}
+    <!-- <input type="text" id="input">
+    <button type="button" onclick="printValue()";>SEARCH</button> -->
+    <br><br>
+    Add book by title<br><br>
+    book title:
+    <input type="text" id="addtitle">
+    <button type="button" onclick="addToTable()";>ADD</button>
+    <br><br>
+   <table style="width:30%">
+    <thead>
+      <th>Book ID</th>
+      <th>Title</th>
+      <th>Cost</th>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td> {{ r.0 }}</td>
+        <td> {{ r[1] }}</td>
+        <td> {{ r[2] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+   </table>
+  <!-- <table style="width:30%" id="bookTable">
+  <tr>
+    <td>3</td>
+    <td>In Cold Blood</td>
+    <td>8.99</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>The Case for Mars</td>
+    <td>9.99</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Breakfast of Champions</td>
+    <td>10.99</td>
+  </tr>
+</table> -->
+</form>
+<script>
+function addToTable(){
+ var table = document.getElementById("bookTable");
+ var row = table.insertRow(0);
+ var out = document.getElementById("addtitle").value;
+
+ var cell1 = row.insertCell(0).innerHTML = Math.floor((Math.random() * 100));
+ var cell2 = row.insertCell(1).innerHTML = out;
+ var cell3 = row.insertCell(2).innerHTML = "10.99";
+}
+</script>
+<script>
+function printValue(){
+ var output = document.getElementById("input").value;
+ if(output == "1"){
+  alert("Breakfast of Champions");
+ }
+ if(output == "2"){
+  alert("The Case for Mars");
+ }
+ if(output == "3"){
+  alert("In Cold Blood");
+ }
+}</script>
+</body>
+</html>

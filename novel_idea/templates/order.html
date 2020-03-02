@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>Order</title>
+</head>
+<body>
+
+<h1>A Novel Idea - Order</h1>
+
+<ul>
+ <li><a href="index.html">Homepage</a></li>
+ <li><a href="author.html">Author</a></li>
+ <li><a href="book.html">Book</a></li>
+ <li><a href="customer.html">Customer</a></li>
+ <li><a href="order.html">Order</a></li>
+</ul>
+<p>Click on the tabs above to get and update information on customers, books, orders, and authors</p>
+<p>Here you can select and insert an order by customer, or delete the customer from the order</p>
+
+<form id="myForm">
+  <fieldset>
+    <legend>Orders:</legend>
+    <br>Search for customer and date by order id<br><br>
+    order id:
+    <input type="text" id="order_search">
+    <button type="submit" onclick="printValue()";>SEARCH</button>
+    <br><br><br>
+    Insert order with order id<br><br>
+    order id:
+    <input type="text" id="order_insert">
+    <button type="submit" onclick="addToTable()";>ADD</button>
+    <br><br><br>
+    delete customer from order (nullable)<br><br>
+    customer id:
+    <input type="text" id="delete_customer_from_order">
+    <button type="submit" onclick="deleteFromTable()";>DELETE</button><br><br>
+    <table style="width:30%">
+     <tr>
+       <th>Order ID</th>
+       <th>date</th>
+       <th>customer ID</th>
+     </tr>
+    </table>
+   <table style="width:30%" id="orderTable">
+   <tr>
+     <td>3</td>
+     <td>"2020-01-17"</td>
+     <td id="4">4</td>
+   </tr>
+   <tr>
+     <td>2</td>
+     <td>"2020-01-12"</td>
+     <td id="5">5</td>
+   </tr>
+   <tr>
+     <td>1</td>
+     <td>"2020-01-10"</td>
+     <td id="6">6</td>
+   </tr>
+ </table>
+</form>
+<script>
+function deleteFromTable(){
+ var val = document.getElementById("delete_customer_from_order").value;
+ document.getElementById(val).innerHTML = " ";
+ var form = document.getElementById("myForm");
+ function handleForm(event)
+ { event.preventDefault(); }
+ form.addEventListener('submit', handleForm);
+}
+</script>
+<script>
+function printValue(){
+ var output = document.getElementById("order_search").value;
+ if(output == "1"){
+  alert("customer id: 6, date: 2020-01-17");
+ }
+ if(output == "2"){
+  alert("customer id: 5, date: 2020-01-12");
+ }
+ if(output == "3"){
+  alert("customer id: 6, date: 2020-01-10");
+ }
+}</script>
+<script>
+function addToTable(){
+ var table = document.getElementById("orderTable");
+ var row = table.insertRow(0);
+ var out = document.getElementById("order_insert").value;
+
+ var cell1 = row.insertCell(0).innerHTML = Math.floor((Math.random() * 100));
+ var cell2 = row.insertCell(1).innerHTML = out;
+ var cell3 = row.insertCell(2).innerHTML = "2020-01-17";
+
+ var form = document.getElementById("myForm");
+ function handleForm(event)
+ { event.preventDefault(); }
+  form.addEventListener('submit', handleForm);
+}
+</script>
+</body>
+</html>
